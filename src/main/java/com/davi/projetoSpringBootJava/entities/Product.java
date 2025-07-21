@@ -1,5 +1,6 @@
 package com.davi.projetoSpringBootJava.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -22,7 +23,8 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "products")
     private Set<Category> categories = new HashSet<>();
 
     public Product(){
