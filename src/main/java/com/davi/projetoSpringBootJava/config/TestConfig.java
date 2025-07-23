@@ -1,14 +1,8 @@
 package com.davi.projetoSpringBootJava.config;
 
-import com.davi.projetoSpringBootJava.entities.Category;
-import com.davi.projetoSpringBootJava.entities.Order;
-import com.davi.projetoSpringBootJava.entities.Product;
-import com.davi.projetoSpringBootJava.entities.User;
+import com.davi.projetoSpringBootJava.entities.*;
 import com.davi.projetoSpringBootJava.entities.enums.OrderStatus;
-import com.davi.projetoSpringBootJava.repositories.CategoryRepository;
-import com.davi.projetoSpringBootJava.repositories.OrderRepository;
-import com.davi.projetoSpringBootJava.repositories.ProductRepository;
-import com.davi.projetoSpringBootJava.repositories.UserRepository;
+import com.davi.projetoSpringBootJava.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -66,5 +63,12 @@ public class TestConfig implements CommandLineRunner {
         cat3.getProducts().add(p4);
 
         categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
     }
 }
